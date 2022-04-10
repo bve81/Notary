@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import CardItem from "../components/CardItem";
 import SearchComponent from "../components/SearchComponent";
 import { Card, Grid, Header } from "semantic-ui-react";
+import { useState } from "react";
 
 //TODO: здесь должен быть код который принимает из пропсов массив объектов list типа {owner : "", gistId: "", gistHash: "" } возвращает список нажимаемых карточек.
 //TODO: По нажатию на карточку в консоль должен выводиться gistId
@@ -13,25 +14,34 @@ const style = {
   },
 };
 
-const Index = ({ list }) => (
-  <Layout>
-    <Grid verticalAlign="middle">
-      <Grid.Column width={8}>
-        <Header as="h3" textAlign="center" style={style.h3}>
-          Контракты:
-        </Header>
-      </Grid.Column>
+const Index = (props) => {
+  const [list, setList] = useState(props.list);
+  const searchResultCallback = (foundedContract) =>
+    setList(foundedContract ? [foundedContract] : props.list);
 
-      <Grid.Column width={8} textAlign="right">
-        <SearchComponent list={list}/>
-      </Grid.Column>
-    </Grid>
+  return (
+    <Layout>
+      <Grid verticalAlign="middle">
+        <Grid.Column width={8}>
+          <Header as="h3" textAlign="center" style={style.h3}>
+            Контракты:
+          </Header>
+        </Grid.Column>
 
-    <Card.Group itemsPerRow="2">
-      <CardItem list={list} />
-    </Card.Group>
-  </Layout>
-);
+        <Grid.Column width={8} textAlign="right">
+          <SearchComponent
+            list={list}
+            searchResultCallback={searchResultCallback}
+          />
+        </Grid.Column>
+      </Grid>
+
+      <Card.Group itemsPerRow="2">
+        <CardItem list={list} />
+      </Card.Group>
+    </Layout>
+  );
+};
 
 export async function getStaticProps() {
   const list = [
