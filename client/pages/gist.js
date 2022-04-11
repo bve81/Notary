@@ -6,13 +6,23 @@ import getGistInfoById from '../utils/gitApi/getGistInfoById.js';
 
 const Gist = (props) => {
     const [gistid, setGistid] = useState('');
+    const [creator, setCreator] = useState([]);
+    const [text, setText] = useState([]);
+    const [lastupdate, setLastupdate] = useState([]);
+  
     function handleOnSubmintForm(e) {
-        getGistInfoById(gistid);
+        let userInfo = getGistInfoById(gistid);
+        userInfo.then(result=>result).then ((result) =>{ setCreator(result.creator); setText(result.text); setLastupdate(result.lastUpdate); });
         e.preventDefault();
       }
     
-
     return ( <Layout>
+<div>
+ <ul>
+     <li>{creator}</li>
+     <li>{text}</li>
+     <li>{lastupdate}</li>
+ </ul>
 <form onSubmit={handleOnSubmintForm}>
   <label>
     GistID:
@@ -20,7 +30,7 @@ const Gist = (props) => {
   </label>
   <input type="submit" value="Отправить" />
 </form>
-
+</div>
         {/* Код писать здесь */}
     </Layout> );
 }

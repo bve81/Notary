@@ -10,9 +10,7 @@ let info = axios.get(`https://api.github.com/gists/${id}`)
 const owner = info.then(result => result)
 .then((result) =>{  
     let fileName = Object.values(result.files);
-    //console.log(fileName);
     let ownerInfo = {creator: result.owner.login, text: fileName[0].content, lastUpdate: result.updated_at }; return ownerInfo});
-console.log(owner);
 return (owner);
 
 }
