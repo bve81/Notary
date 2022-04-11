@@ -17,7 +17,11 @@ const style = {
 const Index = (props) => {
   const [list, setList] = useState(props.list);
   const searchResultCallback = (foundedContract) =>
-    setList(foundedContract ? [foundedContract] : props.list);
+    setList(
+      foundedContract
+        ? [props.list.find((li) => li.title === foundedContract.title)]
+        : props.list
+    );
 
   return (
     <Layout>

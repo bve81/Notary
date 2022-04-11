@@ -5,7 +5,7 @@ import { Search } from "semantic-ui-react";
 const initialState = { isLoading: false, results: [], value: "" };
 
 const SearchComponent = (props) => {
-  const list = props.list.map((li) => ({ ...li, description: li.owner }));
+  const list = props.list.map((li) => ({ title: li.title, description: li.owner }));
   const [state, setState] = useState(initialState);
   const { isLoading, value, results } = state;
 
