@@ -7,7 +7,6 @@ import getGistInfoById from '../utils/gitApi/getGistInfoById.js';
 const Gist = (props) => {
     const [gistid, setGistid] = useState('');
     function handleOnSubmintForm(e) {
-        alert(gistid);
         getGistInfoById(gistid);
         e.preventDefault();
       }
