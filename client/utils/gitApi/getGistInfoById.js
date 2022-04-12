@@ -4,7 +4,6 @@ const getGistInfoById = async (gistId) => {
     const data = await response.json();
     let fileName = Object.values(data.files);
     let owner = {creator: data.owner.login, text: fileName[0].content, lastUpdate: data.updated_at };
-    console.log(fileName[0].content);
 
 return (owner);
 
